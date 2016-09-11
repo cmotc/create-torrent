@@ -119,6 +119,50 @@ If an output file isn\'t specified with `-o`, the torrent file will be
 written to stdout.
 ```
 
+### Browser
+
+Install browserify from npm(browserify-lite from the debian repositories will
+not work for this.)
+
+```
+sudo apt-get install nodejs npm
+sudo npm install -g browserify
+```
+
+Navigate to your source code directory and install the following dependencies
+before building.
+
+```
+npm install bencode block-stream2 piece-length path xtend filestream flatten fs is-file junk multistream once run-parallel simple-sha1 readable-stream
+```
+
+Browserify the contents of the create-torrent package.
+
+```
+browserify ./index.js -o create-torrent.js
+```
+
+Create the index page:
+
+        <!doctype html>
+
+        <html lang="en">
+        <head>
+                <meta charset="utf-8">
+                <title>InstaTorrent!</title>
+                <meta name="description" content="InstaTorrent!">
+                <meta name="author" content="eyedeekay">
+                <link rel="stylesheet" href="styles.css">
+        </head>
+
+        <body>
+                <script src="create-torrent.js"></script>
+
+        </body>
+        </html>
+
+and that's all I've got so far.
+
 ### license
 
 MIT. Copyright (c) [Feross Aboukhadijeh](http://feross.org).
