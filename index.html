@@ -12,12 +12,48 @@
 <body>
         <!-- -->
         <script src="ct.js"></script>
-        <script>
+        <script language="javascript">
+                genTorrent(form)
+                        var blob = null;
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("GET", form.fileURL.value);
+                        xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+                        xhr.onload = function() {
+                                blob = xhr.response;//xhr.response is now a blob object
+                                blob.name=form.fileURL.value;
+                        }
+                        xhr.send();
+                        // Validate name and turn into string
+                        var name = (form.fileName.value == "none" ) ? null : form.fileName.value;
+                        blob.name = (name != null) ? blob.name() : name;
+                        // Validate creator and turn into string
+                        var creator = (form.createdBy.value == "none") ? null : form.createdBy.value;
+                        // Validate comment and turn into string
+                        var comment = (form.comment.value == "none") ? null : form.comment.value;
+                        // Validate time and turn into string
+                        var metadate = (form.creationDate.value == "none") ? null : form.creationDate.value;
+                        // Determine if the user wants the torrent to be private and turn into bool
+                        var privacy = (form.privateTorrent.value == "true") ? true : false;
+                        // Set an arbitrary piece length
+                        var piecelen = (form.pieceLength.value == "none") ? null: form.pieceLength.value;
+                        // Turn supplemental announcers into array of strings, comma-separated
+                        var announcers = (form.announceList.value == "none") ? null : form.announceList.value.split(",");
+                        // Turn supplemental webseeds into array of strings, comma-separated
+                        var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
+                        alert( form.fileURL.value, name, creator, comment, metadate, privacy, piecelen, announcers, webseeds );
+                        /*createTorrent('/path/to/folder', function (err, torrent) {
+                                if (!err) {
+                                        // `torrent` is a Buffer with the contents of the new .torrent file
+                                        // fs.writeFile('my.torrent', torrent)
+                                }
+                        })*/
+                }
         </script>
         <div id="headline">
-                instaTorrent
+                <h1>instaTorrent</h1>
         </div>
         <div id="description">
+                <p>
                 This tool helps you generate web-seeded torrents with ease, thanks to
                 <a href="https://github.com/feross/create-torrent">feross/create-torrent</a>
                 and
@@ -26,17 +62,121 @@
                 web site) that loads the create-torrent library used by the
                 wonderful <a href="https://github.com/feross/webtorrent">feross/webtorrent</a> <a href="https://webtorrent.io">application</a>
                 and gives you a simple way to use it to create a torrent for a
-                file which is already on the web(by using web seeding).
+                file which is already on the web(by using web seeding). It is
+                not intended for creating torrents without web seeds and it
+                probably won't work if you try and give it a file stored locally
+                on your computer. Instead, it's intended to provide an easy way
+                to make files already hosted as HTTP/S downloads torrent-ready.
+                If you need to make a torrent without a web seed, I reccommend
+                you use the tools provided by your torrent client or the
+                excellent mktorrent program available for Unix-Like systems.
+                </p>
+                <p>
+                Why did I create this? Because sites like megaupload and whatnot
+                are annoying as hell, but the things that make them annoying are
+                also things they have a point about(Speed limits for free users,
+                file size limits that basically preclude uploading ISO's and
+                Android ROM's as easy to use single files, reverse Turing Tests,
+                and the ever-present 45 second delay). It's reasonable for them
+                to calculate what they can provide as a business. It's also
+                reasonable for technologies like Bittorrent to provide a much,
+                much, much better option. In order to help transition more
+                people off of these types of sites and onto bittorrent, this
+                application uses web sources to bootstrap peer-to-peer
+                downloads. And frankly, with the library already created by the
+                wonderful <a href="https://github.com/feross">@feross</a> it was
+                way to easy not to.
+                </p>
+                <h4>Why is Bittorrent Better than "Normal" web downloads?</h4>
+                <p>
+                Well first, forget thinking about the Web as normal. The web is
+                a somewhat cool way of delivering easily consumable hypertext
+                content across the internet, a much, much larger and much much
+                more versatile system. Web downloads come from one location run
+                by one company, that has to pay for the hosting, development
+                costs, bandwidth, and other overhead, and that normally have the
+                power to change the contents of their servers or how they serve
+                downloads. I don't think this is a remotely healthy situation,
+                especially when people expect downloads to be more-or-less free.
+                Instead of accommodating all these shortcomings, Bittorrent
+                <p>
+                <p>
+                <h4>Caveats/What sites can I use to Bootstrap my own Torrents?</h4>
+                Unfortunately, it's probably impossible in the long term to use
+                this app with sites that generate a random download URL on a
+                per-download basis, especially after requiring a waiting period.
+                Which kind of sucks. But not all HTTP/S file sharing options are
+                precluded. Some tenative recommendations for bootstrapping your
+                torrents are:
+                <a href="https://openmailbox.org/">Openmailbox.org gives you a 2GB OwnCloud instance running on a Fully-Free Software Stack.</a> <br>
+                <a href="https://github.com/">Github Releases can be of any size and any type and have static, no-delay URL's for downloading.</a> <br>
+                <a href="https://github.com/">Github Pages can host files of up to 100MB and by nature have static URL's</a> <br>
+                <a href="https://google.com/">It is possible to extract static URL's for files on Google Drive using this procedure</a> <br>
+                <a href="https://dropbox.com/">And it's also possible to extract static URL's for files hosted on Dropbox</a> <br>
+                A word on "recommendations," of these services, only
+                Openmailbox.org is built only using Free Software. But, this
+                software is expressly designed to liberate the users by
+                gradually transitioning them away from non-free services to
+                reasonable peer-to-peer downloading options that can be used
+                with no proprietary software. It is, in fact, expressly intended
+                to minimize how much these sites need to be used. So use it with
+                Openmailbox.org to save them money and allow them to keep
+                providing their excellent, freedom-respecting e-mail services.
+                Use it with the other sites to get away from using them anymore
+                as efficiently as possible.
+                </p>
         </div>
         <div id="form">
                 <form name="genTorrent" action="" method="GET">
                         Enter the URL of the file you want to torrent-ify: </br>
-                        <input type="text" name="fileURL" value="">
-                        <input TYPE="button" NAME="button" Value="Click" onClick="">
+                        <input type="text" name="fileURL" value="Enter a URL to torrentify">
+                        Filename: <br>
+                        <input type="text" name="fileName" value="default(name of File URL above)">
+                        Torrent Author: </br>
+                        <input type="text" name="createdBy" value="none">
+                        <a href="">Advanced Options(eventually, these will be hidden by default): </a> </br>
+                        Torrent Comment: </br>
+                        <input type="text" name="comment" value="none">
+                        Torrent Date Override: </br>
+                        <input type="text" name="creationDate" value="none">
+                        Is this a "Private" torrent?</br>
+                        <input type="checkbox" name="privateTorrent" value="true">
+                        Set arbitrary piece length(use with caution):</br>
+                        <input type="text" name="pieceLength" value="none">
+                        Add additional announce URL's: </br>
+                        <input type="text" name="announceList" value="none">
+                        Add additional web seeds(the file you specified will also be used as a web seed)</br>
+                        <input type="text" name="urlList" value="none">
+                        </br>
+                        <input type="button" NAME="button" Value="Click" onClick="genTorrent(this.form)">
                 </form>
         </div>
+        <div id="disclaimer">
+                All of the functionality of this site is provided with a single
+                library and a single javascript function. I, and the rest of the
+                thinking people of the world, want you to look at that code and
+                make sure it does what it says it will do. Your privacy, in the
+                absolutest sense, is important to me. So snce you're here, you
+                don't send any more requests to any server anywhere(With this
+                application), except when it looks at the Web Seed URL's.
+                I don't make any attempt to log any information about anyone who
+                comes here, because invading your privacy and limiting your
+                access to information, will always lead to endangering your
+                safety, no matter who does it or how much they think they know.
+                That said, it doesn't mean much because I have no control over
+                the supporting services whatsoever. But if you are being tracked
+                for creating torrents with this tool, then it was against my
+                express wishes and intentions(so use Tor.).If you wish to avoid
+                this(Admittely low right now) risk, you can run this application
+                locally with very little effort. Simply clone the repository and
+                copy the files index.html, ct.js, and style.css into a
+                locally-hosted http server and visit that site instead. Even if
+                it never becomes necessary, it's very important to preserve
+                privately held, local applications as well as making networking
+                technologies more accessible.
+        </div>
         </div id="footline">
-                Other cool bittorrent-related projects will be added here.
+                Other cool bittorrent-related projects will be added here. <br>
         </div>
 </body>
 </html>
