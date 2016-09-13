@@ -13,11 +13,7 @@
 }
 
 .item{
-        width: 50%;
-        font-size: large;
-        text-align: left;
-        margin: auto;
-        border: 3px solid green;
+        width: 90%;
 }
 
 #form{
