@@ -10,7 +10,7 @@ function genTorrent(form){
                                 blob.name=form.fileURL.value;
                         }
                         xhr.send();*/
-                        var file = form.fileURL.value
+                        var file = form.fileURL.value;
                         // Validate name and turn into string
                         var name = (form.fileName.value == "none" ) ? null : form.fileName.value;
                         blob.name = (name != null) ? blob.name() : name;
