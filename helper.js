@@ -28,10 +28,11 @@ function genTorrent(form){
                         // Turn supplemental webseeds into array of strings, comma-separated
                         var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
                         alert( file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
-                        //createTorrent(blob, function (err, torrent) {
-                            //    if (!err) {
-                                        // `torrent` is a Buffer with the contents of the new .torrent file
-                                        // fs.writeFile('my.torrent', torrent)
-                          //      }
-                        //})
+                        createTorrent(file, function (err, torrent) {
+                                if (!err) {
+                                        alert( "SUCCESS", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
+                                }else{
+                                        alert( "ERROR", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
+                                }
+                        })
                 }
