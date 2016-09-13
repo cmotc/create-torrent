@@ -12,7 +12,7 @@ function genTorrent(form){
                         var file = form.fileURL.value;
                         // Validate name and turn into string
                         var name = (form.fileName.value == "none" ) ? null : form.fileName.value;
-                        blob.name = (name != null) ? blob.name() : name;
+                        //blob.name = (name != null) ? blob.name() : name;
                         // Validate creator and turn into string
                         var creator = (form.createdBy.value == "none") ? null : form.createdBy.value;
                         // Validate comment and turn into string
