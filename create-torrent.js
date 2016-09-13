@@ -74,7 +74,7 @@ function _parseInput (input, opts, cb) {
 
   // In Electron, use the true file path
   input = input.map(function (item) {
-    if (isBlob(item) && typeof item.path === 'string') return item.path
+    if (isBlob(item) && typeof item.path === 'string' && typeof fs.stat === 'function') return item.path
     return item
   })
 
@@ -760,10 +760,10 @@ function Block (size, opts) {
         size = opts.size;
     }
     this.size = size || 512;
-
+    
     if (opts.nopad) this._zeroPadding = false;
     else this._zeroPadding = defined(opts.zeroPadding, true);
-
+    
     this._buffered = [];
     this._bufferedBytes = 0;
 }
@@ -771,7 +771,7 @@ function Block (size, opts) {
 Block.prototype._transform = function (buf, enc, next) {
     this._bufferedBytes += buf.length;
     this._buffered.push(buf);
-
+    
     while (this._bufferedBytes >= this.size) {
         var b = Buffer.concat(this._buffered);
         this._bufferedBytes -= this.size;
@@ -1311,7 +1311,7 @@ for (var i = 14; i <= 22; i++) {
 
 module.exports = function(size) {
   return closest(
-    size / Math.pow(2, 10), sizes
+    size / Math.pow(2, 10), sizes 
   )
 }
 
@@ -1325,7 +1325,7 @@ module.exports = function(target, numbers) {
     return a - b
   })
 
-  for (var i = 0, l = numbers.length; i < l; i++) {
+  for (var i = 0, l = numbers.length; i < l; i++) {  
     difference = Math.abs(target - numbers[i])
     if (difference >= closest) {
       break
