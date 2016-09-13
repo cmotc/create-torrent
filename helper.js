@@ -1,3 +1,5 @@
+
+header("access-control-allow-origin *");
 function genTorrent(form){
                         var blob = null;
                         var xhr = new XMLHttpRequest();
