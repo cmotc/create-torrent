@@ -1,4 +1,4 @@
-
+//<script language="javascript">
 function genTorrent(form){
                         /*var blob = null;
                         var xhr = new XDomainRequest();
@@ -36,3 +36,4 @@ function genTorrent(form){
                                 }
                         })
                 }
+//</script>
