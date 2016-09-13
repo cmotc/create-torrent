@@ -102,25 +102,25 @@
         </div>
         <div id="form">
                 <form name="buildTorrent" action="" method="GET">
-                        <p class="item">Enter the URL of the file you want to torrent-ify:</p>
-                        <input type="text" name="fileURL" class="right" value="Enter a URL to torrentify"></br>
-                        <p class="item">Filename:</p>
-                        <input type="text" name="fileName" class="right" value="default(name of File URL above)"></br>
-                        <p class="item">Torrent Author:</p>
-                        <input type="text" name="createdBy" class="right" value="none"></br>
+                        <p class="item">Enter the URL of the file you want to torrent-ify:
+                        <input type="text" name="fileURL" class="right" value="Enter a URL to torrentify"></br></p>
+                        <p class="item">Filename:
+                        <input type="text" name="fileName" class="right" value="default(name of File URL above)"></br></p>
+                        <p class="item">Torrent Author:
+                        <input type="text" name="createdBy" class="right" value="none"></br></p>
                         <a href="">Advanced Options(eventually, these will be hidden by default): </a> </br>
-                        <p class="item">Torrent Comment:</p>
-                        <input type="text" name="comment" class="right" value="none"></br>
-                        <p class="item">Torrent Date Override:</p>
-                        <input type="text" name="creationDate" class="right" value="none"></br>
-                        <p class="item">Is this a "Private" torrent?</p>
-                        <input type="checkbox" name="privateTorrent" class="right" value="true"></br>
-                        <p class="item">Set arbitrary piece length(use with caution):</p>
-                        <input type="text" name="pieceLength" class="right" value="none"></br>
-                        <p class="item">Add additional announce URL's:</p>
-                        <input type="text" name="announceList" class="right" value="none"></br>
-                        <p class="item">Add additional web seeds(the file you specified will also be used as a web seed)</p>
-                        <input type="text" name="urlList" class="right" value="none"></br>
+                        <p class="item">Torrent Comment:
+                        <input type="text" name="comment" class="right" value="none"></br></p>
+                        <p class="item">Torrent Date Override:
+                        <input type="text" name="creationDate" class="right" value="none"></br></p>
+                        <p class="item">Is this a "Private" torrent?
+                        <input type="checkbox" name="privateTorrent" class="right" value="true"></br></p>
+                        <p class="item">Set arbitrary piece length(use with caution):
+                        <input type="text" name="pieceLength" class="right" value="none"></br></p>
+                        <p class="item">Add additional announce URL's:
+                        <input type="text" name="announceList" class="right" value="none"></br></p>
+                        <p class="item">Add additional web seeds(the file you specified will also be used as a web seed)
+                        <input type="text" name="urlList" class="right" value="none"></br></p>
                         </br>
                         <input type="button" NAME="button" Value="Click" onClick=genTorrent(this.form)>
                 </form>
