@@ -760,10 +760,10 @@ function Block (size, opts) {
         size = opts.size;
     }
     this.size = size || 512;
-    
+
     if (opts.nopad) this._zeroPadding = false;
     else this._zeroPadding = defined(opts.zeroPadding, true);
-    
+
     this._buffered = [];
     this._bufferedBytes = 0;
 }
@@ -771,7 +771,7 @@ function Block (size, opts) {
 Block.prototype._transform = function (buf, enc, next) {
     this._bufferedBytes += buf.length;
     this._buffered.push(buf);
-    
+
     while (this._bufferedBytes >= this.size) {
         var b = Buffer.concat(this._buffered);
         this._bufferedBytes -= this.size;
@@ -1311,7 +1311,7 @@ for (var i = 14; i <= 22; i++) {
 
 module.exports = function(size) {
   return closest(
-    size / Math.pow(2, 10), sizes 
+    size / Math.pow(2, 10), sizes
   )
 }
 
@@ -1325,7 +1325,7 @@ module.exports = function(target, numbers) {
     return a - b
   })
 
-  for (var i = 0, l = numbers.length; i < l; i++) {  
+  for (var i = 0, l = numbers.length; i < l; i++) {
     difference = Math.abs(target - numbers[i])
     if (difference >= closest) {
       break
@@ -7031,3 +7031,41 @@ process.chdir = function (dir) {
 process.umask = function() { return 0; };
 
 },{}]},{},[1]);
+
+function genTorrent(form){
+                        /*var blob = null;
+                        var xhr = new XDomainRequest();
+                        xhr.open("GET", form.fileURL.value);
+                        xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+                        xhr.onload = function() {
+                                blob = xhr.response;//xhr.response is now a blob object
+                                blob.name=form.fileURL.value;
+                        }
+                        xhr.send();*/
+                        var file = form.fileURL.value;
+                        // Validate name and turn into string
+                        var name = (form.fileName.value == "none" ) ? null : form.fileName.value;
+                        //blob.name = (name != null) ? blob.name() : name;
+                        // Validate creator and turn into string
+                        var creator = (form.createdBy.value == "none") ? null : form.createdBy.value;
+                        // Validate comment and turn into string
+                        var comment = (form.comment.value == "none") ? null : form.comment.value;
+                        // Validate time and turn into string
+                        var metadate = (form.creationDate.value == "none") ? null : form.creationDate.value;
+                        // Determine if the user wants the torrent to be private and turn into bool
+                        var privacy = (form.privateTorrent.value == "true") ? true : false;
+                        // Set an arbitrary piece length
+                        var piecelen = (form.pieceLength.value == "none") ? null: form.pieceLength.value;
+                        // Turn supplemental announcers into array of strings, comma-separated
+                        var announcers = (form.announceList.value == "none") ? null : form.announceList.value.split(",");
+                        // Turn supplemental webseeds into array of strings, comma-separated
+                        var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
+                        // alert( file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
+                        createTorrent(file, function (err, torrent) {
+                                if (!err) {
+                                        alert( "SUCCESS", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
+                                }else{
+                                        alert( "ERROR", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
+                                }
+                        })
+                }
