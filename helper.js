@@ -1,6 +1,6 @@
 //<script language="javascript">
-function genTorrent(form){
-                        /*var blob = null;
+/*function genTorrent(form){
+                        var blob = null;
                         var xhr = new XDomainRequest();
                         xhr.open("GET", form.fileURL.value);
                         xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
@@ -8,7 +8,7 @@ function genTorrent(form){
                                 blob = xhr.response;//xhr.response is now a blob object
                                 blob.name=form.fileURL.value;
                         }
-                        xhr.send();*/
+                        xhr.send();
                         var file = form.fileURL.value;
                         // Validate name and turn into string
                         var name = (form.fileName.value == "none" ) ? null : form.fileName.value;
@@ -35,5 +35,5 @@ function genTorrent(form){
                                         alert( "ERROR", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
                                 }
                         })
-                }
+                }*/
 //</script>
