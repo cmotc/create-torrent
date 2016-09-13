@@ -2,7 +2,7 @@
 header("access-control-allow-origin *");
 function genTorrent(form){
                         var blob = null;
-                        var xhr = new XMLHttpRequest();
+                        var xhr = new XDomainRequest();
                         xhr.open("GET", form.fileURL.value);
                         xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
                         xhr.onload = function() {
