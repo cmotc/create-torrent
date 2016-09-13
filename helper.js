@@ -1,4 +1,4 @@
-//<script language="javascript">
+
 function genTorrent(form){
                         var file = form.fileURL.value;
                         // Validate name and turn into string
@@ -20,11 +20,10 @@ function genTorrent(form){
                         var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
                         // alert( file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
                         createTorrent(file, function (err, torrent) {
-                                if (!err) {
+                                if ( !err ) {
                                         alert( "SUCCESS", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
                                 }else{
                                         alert( "ERROR", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
                                 }
                         })
                 }
-//</script>

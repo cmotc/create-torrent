@@ -1,82 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (process){
-
-var createTorrent = require('../')
-var fs = require('fs')
-var minimist = require('minimist')
-
-var argv = minimist(process.argv.slice(2), {
-  alias: {
-    o: 'outfile',
-    n: 'name',
-    h: 'help',
-    v: 'version'
-  },
-  boolean: [
-    'help',
-    'version'
-  ],
-  string: [
-    'outfile',
-    'name',
-    'creationDate',
-    'comment',
-    'createdBy',
-    'announce',
-    'urlList'
-  ],
-  default: {
-    createdBy: 'WebTorrent <https://webtorrent.io>'
-  }
-})
-
-var infile = argv._[0]
-var outfile = argv.outfile
-
-if (argv.version) {
-  console.log(require('../package.json').version)
-  process.exit(0)
-}
-
-if (!infile || argv.help) {
-  console.log('usage: create-torrent <directory OR file> [OPTIONS]')
-  console.log('')
-  console.log('Create a torrent file from a directory or file.')
-  console.log('')
-  console.log('If an output file isn\'t specified with `-o`, the torrent file will be ')
-  console.log('written to stdout.')
-  console.log('')
-  console.log('-o, --outfile    Output file. If not specified, stdout is used [string]')
-  console.log('-n, --name       Torrent name [string]')
-  console.log('--creationDate   Creation date [Date]')
-  console.log('--comment        Torrent comment [string]')
-  console.log('--createdBy      Created by client [string]')
-  console.log('--private        Private torrent? [boolean] [default: false]')
-  console.log('--pieceLength    Piece length [number] [default: reasonable length]')
-  console.log('--announce       Tracker url [string] [default: reasonable trackers]')
-  console.log('--urlList        Web seed url [string]')
-  console.log('')
-  process.exit(0)
-}
-
-createTorrent(infile, argv, function (err, torrent) {
-  if (err) {
-    console.error(err.stack)
-    process.exit(1)
-  } else if (outfile) {
-    fs.writeFile(outfile, torrent, function (err) {
-      if (err) {
-        console.error(err.stack)
-        process.exit(1)
-      }
-    })
-  } else {
-    process.stdout.write(torrent)
-  }
-})
-
-}).call(this,require('_process'))
-},{"../":2,"../package.json":41,"_process":51,"fs":42,"minimist":16}],2:[function(require,module,exports){
 (function (process,global,Buffer){
 module.exports = createTorrent
 module.exports.parseInput = parseInput
@@ -572,7 +494,7 @@ function getStreamStream (readable, file) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"_process":51,"bencode":5,"block-stream2":6,"buffer":44,"filestream/read":12,"flatten":13,"fs":42,"is-file":14,"junk":15,"multistream":17,"once":20,"path":50,"piece-length":21,"readable-stream":36,"run-parallel":37,"simple-sha1":38,"xtend":40}],3:[function(require,module,exports){
+},{"_process":48,"bencode":4,"block-stream2":5,"buffer":41,"filestream/read":11,"flatten":12,"fs":39,"is-file":13,"junk":14,"multistream":15,"once":18,"path":47,"piece-length":19,"readable-stream":34,"run-parallel":35,"simple-sha1":36,"xtend":38}],2:[function(require,module,exports){
 (function (Buffer){
 /**
  * Decodes bencoded data.
@@ -693,7 +615,7 @@ decode.buffer = function () {
 module.exports = decode
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":44}],4:[function(require,module,exports){
+},{"buffer":41}],3:[function(require,module,exports){
 (function (Buffer){
 /**
  * Encodes data in bencode.
@@ -804,7 +726,7 @@ encode.list = function (buffers, data) {
 module.exports = encode
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":44}],5:[function(require,module,exports){
+},{"buffer":41}],4:[function(require,module,exports){
 var bencode = module.exports
 
 bencode.encode = require('./encode')
@@ -820,7 +742,7 @@ bencode.byteLength = bencode.encodingLength = function (value) {
   return bencode.encode(value).length
 }
 
-},{"./decode":3,"./encode":4}],6:[function(require,module,exports){
+},{"./decode":2,"./encode":3}],5:[function(require,module,exports){
 (function (Buffer){
 var inherits = require('inherits');
 var Transform = require('readable-stream').Transform;
@@ -875,14 +797,14 @@ Block.prototype._flush = function () {
 };
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":44,"defined":7,"inherits":8,"readable-stream":36}],7:[function(require,module,exports){
+},{"buffer":41,"defined":6,"inherits":7,"readable-stream":34}],6:[function(require,module,exports){
 module.exports = function () {
     for (var i = 0; i < arguments.length; i++) {
         if (arguments[i] !== undefined) return arguments[i];
     }
 };
 
-},{}],8:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -907,9 +829,9 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],9:[function(require,module,exports){
-arguments[4][8][0].apply(exports,arguments)
-},{"dup":8}],10:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+arguments[4][7][0].apply(exports,arguments)
+},{"dup":7}],9:[function(require,module,exports){
 (function (Buffer){
 /**
  * Convert a typed array to a Buffer without a copy
@@ -938,7 +860,7 @@ module.exports = function typedarrayToBuffer (arr) {
 }
 
 }).call(this,require("buffer").Buffer)
-},{"buffer":44,"is-typedarray":11}],11:[function(require,module,exports){
+},{"buffer":41,"is-typedarray":10}],10:[function(require,module,exports){
 module.exports      = isTypedArray
 isTypedArray.strict = isStrictTypedArray
 isTypedArray.loose  = isLooseTypedArray
@@ -981,7 +903,7 @@ function isLooseTypedArray(arr) {
   return names[toString.call(arr)]
 }
 
-},{}],12:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 var Readable = require('readable-stream').Readable;
 var inherits = require('inherits');
 var reExtension = /^.*\.(\w+)$/;
@@ -1075,7 +997,7 @@ FileReadStream.prototype.destroy = function() {
   this.reader = null;
 }
 
-},{"inherits":9,"readable-stream":36,"typedarray-to-buffer":10}],13:[function(require,module,exports){
+},{"inherits":8,"readable-stream":34,"typedarray-to-buffer":9}],12:[function(require,module,exports){
 module.exports = function flatten(list, depth) {
   depth = (typeof depth == 'number') ? depth : Infinity;
 
@@ -1100,7 +1022,7 @@ module.exports = function flatten(list, depth) {
   }
 };
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 'use strict';
 
 var fs = require('fs');
@@ -1120,7 +1042,7 @@ function isFileSync(path){
   return fs.existsSync(path) && fs.statSync(path).isFile();
 }
 
-},{"fs":42}],15:[function(require,module,exports){
+},{"fs":39}],14:[function(require,module,exports){
 'use strict';
 
 // // All
@@ -1152,245 +1074,7 @@ exports.not = exports.isnt = function (filename) {
 	return !exports.is(filename);
 };
 
-},{}],16:[function(require,module,exports){
-module.exports = function (args, opts) {
-    if (!opts) opts = {};
-    
-    var flags = { bools : {}, strings : {}, unknownFn: null };
-
-    if (typeof opts['unknown'] === 'function') {
-        flags.unknownFn = opts['unknown'];
-    }
-
-    if (typeof opts['boolean'] === 'boolean' && opts['boolean']) {
-      flags.allBools = true;
-    } else {
-      [].concat(opts['boolean']).filter(Boolean).forEach(function (key) {
-          flags.bools[key] = true;
-      });
-    }
-    
-    var aliases = {};
-    Object.keys(opts.alias || {}).forEach(function (key) {
-        aliases[key] = [].concat(opts.alias[key]);
-        aliases[key].forEach(function (x) {
-            aliases[x] = [key].concat(aliases[key].filter(function (y) {
-                return x !== y;
-            }));
-        });
-    });
-
-    [].concat(opts.string).filter(Boolean).forEach(function (key) {
-        flags.strings[key] = true;
-        if (aliases[key]) {
-            flags.strings[aliases[key]] = true;
-        }
-     });
-
-    var defaults = opts['default'] || {};
-    
-    var argv = { _ : [] };
-    Object.keys(flags.bools).forEach(function (key) {
-        setArg(key, defaults[key] === undefined ? false : defaults[key]);
-    });
-    
-    var notFlags = [];
-
-    if (args.indexOf('--') !== -1) {
-        notFlags = args.slice(args.indexOf('--')+1);
-        args = args.slice(0, args.indexOf('--'));
-    }
-
-    function argDefined(key, arg) {
-        return (flags.allBools && /^--[^=]+$/.test(arg)) ||
-            flags.strings[key] || flags.bools[key] || aliases[key];
-    }
-
-    function setArg (key, val, arg) {
-        if (arg && flags.unknownFn && !argDefined(key, arg)) {
-            if (flags.unknownFn(arg) === false) return;
-        }
-
-        var value = !flags.strings[key] && isNumber(val)
-            ? Number(val) : val
-        ;
-        setKey(argv, key.split('.'), value);
-        
-        (aliases[key] || []).forEach(function (x) {
-            setKey(argv, x.split('.'), value);
-        });
-    }
-
-    function setKey (obj, keys, value) {
-        var o = obj;
-        keys.slice(0,-1).forEach(function (key) {
-            if (o[key] === undefined) o[key] = {};
-            o = o[key];
-        });
-
-        var key = keys[keys.length - 1];
-        if (o[key] === undefined || flags.bools[key] || typeof o[key] === 'boolean') {
-            o[key] = value;
-        }
-        else if (Array.isArray(o[key])) {
-            o[key].push(value);
-        }
-        else {
-            o[key] = [ o[key], value ];
-        }
-    }
-    
-    function aliasIsBoolean(key) {
-      return aliases[key].some(function (x) {
-          return flags.bools[x];
-      });
-    }
-
-    for (var i = 0; i < args.length; i++) {
-        var arg = args[i];
-        
-        if (/^--.+=/.test(arg)) {
-            // Using [\s\S] instead of . because js doesn't support the
-            // 'dotall' regex modifier. See:
-            // http://stackoverflow.com/a/1068308/13216
-            var m = arg.match(/^--([^=]+)=([\s\S]*)$/);
-            var key = m[1];
-            var value = m[2];
-            if (flags.bools[key]) {
-                value = value !== 'false';
-            }
-            setArg(key, value, arg);
-        }
-        else if (/^--no-.+/.test(arg)) {
-            var key = arg.match(/^--no-(.+)/)[1];
-            setArg(key, false, arg);
-        }
-        else if (/^--.+/.test(arg)) {
-            var key = arg.match(/^--(.+)/)[1];
-            var next = args[i + 1];
-            if (next !== undefined && !/^-/.test(next)
-            && !flags.bools[key]
-            && !flags.allBools
-            && (aliases[key] ? !aliasIsBoolean(key) : true)) {
-                setArg(key, next, arg);
-                i++;
-            }
-            else if (/^(true|false)$/.test(next)) {
-                setArg(key, next === 'true', arg);
-                i++;
-            }
-            else {
-                setArg(key, flags.strings[key] ? '' : true, arg);
-            }
-        }
-        else if (/^-[^-]+/.test(arg)) {
-            var letters = arg.slice(1,-1).split('');
-            
-            var broken = false;
-            for (var j = 0; j < letters.length; j++) {
-                var next = arg.slice(j+2);
-                
-                if (next === '-') {
-                    setArg(letters[j], next, arg)
-                    continue;
-                }
-                
-                if (/[A-Za-z]/.test(letters[j]) && /=/.test(next)) {
-                    setArg(letters[j], next.split('=')[1], arg);
-                    broken = true;
-                    break;
-                }
-                
-                if (/[A-Za-z]/.test(letters[j])
-                && /-?\d+(\.\d*)?(e-?\d+)?$/.test(next)) {
-                    setArg(letters[j], next, arg);
-                    broken = true;
-                    break;
-                }
-                
-                if (letters[j+1] && letters[j+1].match(/\W/)) {
-                    setArg(letters[j], arg.slice(j+2), arg);
-                    broken = true;
-                    break;
-                }
-                else {
-                    setArg(letters[j], flags.strings[letters[j]] ? '' : true, arg);
-                }
-            }
-            
-            var key = arg.slice(-1)[0];
-            if (!broken && key !== '-') {
-                if (args[i+1] && !/^(-|--)[^-]/.test(args[i+1])
-                && !flags.bools[key]
-                && (aliases[key] ? !aliasIsBoolean(key) : true)) {
-                    setArg(key, args[i+1], arg);
-                    i++;
-                }
-                else if (args[i+1] && /true|false/.test(args[i+1])) {
-                    setArg(key, args[i+1] === 'true', arg);
-                    i++;
-                }
-                else {
-                    setArg(key, flags.strings[key] ? '' : true, arg);
-                }
-            }
-        }
-        else {
-            if (!flags.unknownFn || flags.unknownFn(arg) !== false) {
-                argv._.push(
-                    flags.strings['_'] || !isNumber(arg) ? arg : Number(arg)
-                );
-            }
-            if (opts.stopEarly) {
-                argv._.push.apply(argv._, args.slice(i + 1));
-                break;
-            }
-        }
-    }
-    
-    Object.keys(defaults).forEach(function (key) {
-        if (!hasKey(argv, key.split('.'))) {
-            setKey(argv, key.split('.'), defaults[key]);
-            
-            (aliases[key] || []).forEach(function (x) {
-                setKey(argv, x.split('.'), defaults[key]);
-            });
-        }
-    });
-    
-    if (opts['--']) {
-        argv['--'] = new Array();
-        notFlags.forEach(function(key) {
-            argv['--'].push(key);
-        });
-    }
-    else {
-        notFlags.forEach(function(key) {
-            argv._.push(key);
-        });
-    }
-
-    return argv;
-};
-
-function hasKey (obj, keys) {
-    var o = obj;
-    keys.slice(0,-1).forEach(function (key) {
-        o = (o[key] || {});
-    });
-
-    var key = keys[keys.length - 1];
-    return key in o;
-}
-
-function isNumber (x) {
-    if (typeof x === 'number') return true;
-    if (/^0x[0-9a-f]+$/i.test(x)) return true;
-    return /^[-+]?(?:\d+(?:\.\d*)?|\.\d+)(e[-+]?\d+)?$/.test(x);
-}
-
-
-},{}],17:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports = MultiStream
 
 var inherits = require('inherits')
@@ -1535,9 +1219,9 @@ function toStreams2 (s) {
   return wrap
 }
 
-},{"inherits":18,"readable-stream":36}],18:[function(require,module,exports){
-arguments[4][8][0].apply(exports,arguments)
-},{"dup":8}],19:[function(require,module,exports){
+},{"inherits":16,"readable-stream":34}],16:[function(require,module,exports){
+arguments[4][7][0].apply(exports,arguments)
+},{"dup":7}],17:[function(require,module,exports){
 // Returns a wrapper function that returns a wrapped callback
 // The wrapper function should do some stuff, and return a
 // presumably different callback function.
@@ -1572,7 +1256,7 @@ function wrappy (fn, cb) {
   }
 }
 
-},{}],20:[function(require,module,exports){
+},{}],18:[function(require,module,exports){
 var wrappy = require('wrappy')
 module.exports = wrappy(once)
 module.exports.strict = wrappy(onceStrict)
@@ -1616,7 +1300,7 @@ function onceStrict (fn) {
   return f
 }
 
-},{"wrappy":19}],21:[function(require,module,exports){
+},{"wrappy":17}],19:[function(require,module,exports){
 var closest = require('closest-to')
 
 // Create a range from 16kb–4mb
@@ -1631,7 +1315,7 @@ module.exports = function(size) {
   )
 }
 
-},{"closest-to":22}],22:[function(require,module,exports){
+},{"closest-to":20}],20:[function(require,module,exports){
 module.exports = function(target, numbers) {
   var closest = Infinity
   var difference = 0
@@ -1653,7 +1337,7 @@ module.exports = function(target, numbers) {
   return winner
 }
 
-},{}],23:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -1729,7 +1413,7 @@ function forEach(xs, f) {
     f(xs[i], i);
   }
 }
-},{"./_stream_readable":25,"./_stream_writable":27,"core-util-is":30,"inherits":31,"process-nextick-args":33}],24:[function(require,module,exports){
+},{"./_stream_readable":23,"./_stream_writable":25,"core-util-is":28,"inherits":29,"process-nextick-args":31}],22:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -1756,7 +1440,7 @@ function PassThrough(options) {
 PassThrough.prototype._transform = function (chunk, encoding, cb) {
   cb(null, chunk);
 };
-},{"./_stream_transform":26,"core-util-is":30,"inherits":31}],25:[function(require,module,exports){
+},{"./_stream_transform":24,"core-util-is":28,"inherits":29}],23:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -2696,7 +2380,7 @@ function indexOf(xs, x) {
   return -1;
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":23,"./internal/streams/BufferList":28,"_process":51,"buffer":44,"buffer-shims":29,"core-util-is":30,"events":48,"inherits":31,"isarray":32,"process-nextick-args":33,"string_decoder/":34,"util":43}],26:[function(require,module,exports){
+},{"./_stream_duplex":21,"./internal/streams/BufferList":26,"_process":48,"buffer":41,"buffer-shims":27,"core-util-is":28,"events":45,"inherits":29,"isarray":30,"process-nextick-args":31,"string_decoder/":32,"util":40}],24:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -2877,7 +2561,7 @@ function done(stream, er) {
 
   return stream.push(null);
 }
-},{"./_stream_duplex":23,"core-util-is":30,"inherits":31}],27:[function(require,module,exports){
+},{"./_stream_duplex":21,"core-util-is":28,"inherits":29}],25:[function(require,module,exports){
 (function (process){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
@@ -3406,7 +3090,7 @@ function CorkedRequest(state) {
   };
 }
 }).call(this,require('_process'))
-},{"./_stream_duplex":23,"_process":51,"buffer":44,"buffer-shims":29,"core-util-is":30,"events":48,"inherits":31,"process-nextick-args":33,"util-deprecate":35}],28:[function(require,module,exports){
+},{"./_stream_duplex":21,"_process":48,"buffer":41,"buffer-shims":27,"core-util-is":28,"events":45,"inherits":29,"process-nextick-args":31,"util-deprecate":33}],26:[function(require,module,exports){
 'use strict';
 
 var Buffer = require('buffer').Buffer;
@@ -3471,7 +3155,7 @@ BufferList.prototype.concat = function (n) {
   }
   return ret;
 };
-},{"buffer":44,"buffer-shims":29}],29:[function(require,module,exports){
+},{"buffer":41,"buffer-shims":27}],27:[function(require,module,exports){
 (function (global){
 'use strict';
 
@@ -3583,7 +3267,7 @@ exports.allocUnsafeSlow = function allocUnsafeSlow(size) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"buffer":44}],30:[function(require,module,exports){
+},{"buffer":41}],28:[function(require,module,exports){
 (function (Buffer){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -3694,16 +3378,16 @@ function objectToString(o) {
 }
 
 }).call(this,{"isBuffer":require("../../../../../../../../../usr/local/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js")})
-},{"../../../../../../../../../usr/local/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":49}],31:[function(require,module,exports){
-arguments[4][8][0].apply(exports,arguments)
-},{"dup":8}],32:[function(require,module,exports){
+},{"../../../../../../../../../usr/local/lib/node_modules/browserify/node_modules/insert-module-globals/node_modules/is-buffer/index.js":46}],29:[function(require,module,exports){
+arguments[4][7][0].apply(exports,arguments)
+},{"dup":7}],30:[function(require,module,exports){
 var toString = {}.toString;
 
 module.exports = Array.isArray || function (arr) {
   return toString.call(arr) == '[object Array]';
 };
 
-},{}],33:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -3750,7 +3434,7 @@ function nextTick(fn, arg1, arg2, arg3) {
 }
 
 }).call(this,require('_process'))
-},{"_process":51}],34:[function(require,module,exports){
+},{"_process":48}],32:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -3973,7 +3657,7 @@ function base64DetectIncompleteChar(buffer) {
   this.charLength = this.charReceived ? 3 : 0;
 }
 
-},{"buffer":44}],35:[function(require,module,exports){
+},{"buffer":41}],33:[function(require,module,exports){
 (function (global){
 
 /**
@@ -4044,7 +3728,7 @@ function config (name) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],36:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 (function (process){
 var Stream = (function (){
   try {
@@ -4064,7 +3748,7 @@ if (!process.browser && process.env.READABLE_STREAM === 'disable' && Stream) {
 }
 
 }).call(this,require('_process'))
-},{"./lib/_stream_duplex.js":23,"./lib/_stream_passthrough.js":24,"./lib/_stream_readable.js":25,"./lib/_stream_transform.js":26,"./lib/_stream_writable.js":27,"_process":51}],37:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":21,"./lib/_stream_passthrough.js":22,"./lib/_stream_readable.js":23,"./lib/_stream_transform.js":24,"./lib/_stream_writable.js":25,"_process":48}],35:[function(require,module,exports){
 (function (process){
 module.exports = function (tasks, cb) {
   var results, pending, keys
@@ -4114,7 +3798,7 @@ module.exports = function (tasks, cb) {
 }
 
 }).call(this,require('_process'))
-},{"_process":51}],38:[function(require,module,exports){
+},{"_process":48}],36:[function(require,module,exports){
 var Rusha = require('rusha')
 
 var rusha = new Rusha
@@ -4176,7 +3860,7 @@ function hex (buf) {
 module.exports = sha1
 module.exports.sync = sha1sync
 
-},{"rusha":39}],39:[function(require,module,exports){
+},{"rusha":37}],37:[function(require,module,exports){
 (function (global){
 /*
  * Rusha, a JavaScript implementation of the Secure Hash Algorithm, SHA-1,
@@ -4592,7 +4276,7 @@ module.exports.sync = sha1sync
     }
 }());
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],40:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 module.exports = extend
 
 var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -4613,81 +4297,11 @@ function extend() {
     return target
 }
 
-},{}],41:[function(require,module,exports){
-module.exports={
-  "name": "create-torrent",
-  "description": "Create .torrent files",
-  "version": "3.24.8",
-  "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
-  "bin": {
-    "create-torrent": "./bin/cmd.js"
-  },
-  "bugs": {
-    "url": "https://github.com/feross/create-torrent/issues"
-  },
-  "dependencies": {
-    "bencode": "^0.10.0",
-    "block-stream2": "^1.0.0",
-    "filestream": "^4.0.0",
-    "flatten": "^1.0.2",
-    "is-file": "^1.0.0",
-    "junk": "^1.0.1",
-    "minimist": "^1.1.0",
-    "multistream": "^2.0.2",
-    "once": "^1.3.0",
-    "piece-length": "^0.0.0",
-    "readable-stream": "^2.0.5",
-    "run-parallel": "^1.0.0",
-    "simple-sha1": "^2.0.0",
-    "xtend": "^4.0.1"
-  },
-  "devDependencies": {
-    "brfs": "^1.1.2",
-    "parse-torrent": "^5.0.0",
-    "standard": "*",
-    "tape": "^4.0.0",
-    "webtorrent-fixtures": "^1.4.0",
-    "zuul": "^3.0.0"
-  },
-  "homepage": "https://github.com/feross/create-torrent",
-  "keywords": [
-    "torrent",
-    "create torrent",
-    "make",
-    "torrent file",
-    "torrent files",
-    ".torrent",
-    "create",
-    "peer-to-peer",
-    "bittorrent",
-    "new",
-    "webtorrent"
-  ],
-  "license": "MIT",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/feross/create-torrent.git"
-  },
-  "scripts": {
-    "test": "standard && npm run test-node && npm run test-browser",
-    "test-browser": "zuul -- test/browser/*.js",
-    "test-browser-local": "zuul --local -- test/browser/*.js",
-    "test-node": "tape test/*.js"
-  },
-  "standard": {
-    "globals": [
-      "Blob",
-      "FileList"
-    ]
-  }
-}
+},{}],39:[function(require,module,exports){
 
-},{}],42:[function(require,module,exports){
-
-},{}],43:[function(require,module,exports){
-arguments[4][42][0].apply(exports,arguments)
-},{"dup":42}],44:[function(require,module,exports){
+},{}],40:[function(require,module,exports){
+arguments[4][39][0].apply(exports,arguments)
+},{"dup":39}],41:[function(require,module,exports){
 (function (global){
 /*!
  * The buffer module from node.js, for the browser.
@@ -6480,7 +6094,7 @@ function isnan (val) {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"base64-js":45,"ieee754":46,"isarray":47}],45:[function(require,module,exports){
+},{"base64-js":42,"ieee754":43,"isarray":44}],42:[function(require,module,exports){
 'use strict'
 
 exports.toByteArray = toByteArray
@@ -6591,7 +6205,7 @@ function fromByteArray (uint8) {
   return parts.join('')
 }
 
-},{}],46:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 exports.read = function (buffer, offset, isLE, mLen, nBytes) {
   var e, m
   var eLen = nBytes * 8 - mLen - 1
@@ -6677,9 +6291,9 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
   buffer[offset + i - d] |= s * 128
 }
 
-},{}],47:[function(require,module,exports){
-arguments[4][32][0].apply(exports,arguments)
-},{"dup":32}],48:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
+arguments[4][30][0].apply(exports,arguments)
+},{"dup":30}],45:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -6983,7 +6597,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],49:[function(require,module,exports){
+},{}],46:[function(require,module,exports){
 /*!
  * Determine if an object is a Buffer
  *
@@ -7006,7 +6620,7 @@ function isSlowBuffer (obj) {
   return typeof obj.readFloatLE === 'function' && typeof obj.slice === 'function' && isBuffer(obj.slice(0, 0))
 }
 
-},{}],50:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -7234,7 +6848,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":51}],51:[function(require,module,exports){
+},{"_process":48}],48:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
