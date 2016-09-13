@@ -15,7 +15,7 @@
 #form{
         width: 50%;
         font-size: large;
-        text-align: center;
+        text-align: right;
         margin: auto;
         border: 3px solid green;
 }
