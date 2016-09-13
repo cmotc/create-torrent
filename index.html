@@ -41,12 +41,12 @@
                         // Turn supplemental webseeds into array of strings, comma-separated
                         var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
                         alert( form.fileURL.value, name, creator, comment, metadate, privacy, piecelen, announcers, webseeds );
-                        /*createTorrent('/path/to/folder', function (err, torrent) {
-                                if (!err) {
+                        //createTorrent(blob, function (err, torrent) {
+                            //    if (!err) {
                                         // `torrent` is a Buffer with the contents of the new .torrent file
                                         // fs.writeFile('my.torrent', torrent)
-                                }
-                        })*/
+                          //      }
+                        //})
                 }
         </script>
         <div id="headline">
@@ -128,28 +128,27 @@
         </div>
         <div id="form">
                 <form name="genTorrent" action="" method="GET">
-                        Enter the URL of the file you want to torrent-ify: </br>
-                        <input type="text" name="fileURL" value="Enter a URL to torrentify">
-                        Filename: </br>
-                        <input type="text" name="fileName" value="default(name of File URL above)">
-                        Torrent Author: </br>
+                        Enter the URL of the file you want to torrent-ify:
+                        <input type="text" name="fileURL" value="Enter a URL to torrentify"></br>
+                        Filename:
+                        <input type="text" name="fileName" value="default(name of File URL above)"></br>
+                        Torrent Author:
                         <input type="text" name="createdBy" value="none"></br>
                         <a href="">Advanced Options(eventually, these will be hidden by default): </a> </br>
-                        Torrent Comment: </br>
-                        <input type="text" name="comment" value="none">
-                        Torrent Date Override: </br>
-                        <input type="text" name="creationDate" value="none">
-                        Is this a "Private" torrent?</br>
-                        <input type="checkbox" name="privateTorrent" value="true">
-                        Set arbitrary piece length(use with caution):</br>
-                        <input type="text" name="pieceLength" value="none">
-                        Add additional announce URL's: </br>
-                        <input type="text" name="announceList" value="none">
-                        Add additional web seeds(the file you specified will also be used as a web seed)</br>
-                        <input type="text" name="urlList" value="none">
+                        Torrent Comment:
+                        <input type="text" name="comment" value="none"></br>
+                        Torrent Date Override:
+                        <input type="text" name="creationDate" value="none"></br>
+                        Is this a "Private" torrent?
+                        <input type="checkbox" name="privateTorrent" value="true"></br>
+                        Set arbitrary piece length(use with caution):
+                        <input type="text" name="pieceLength" value="none"></br>
+                        Add additional announce URL's:
+                        <input type="text" name="announceList" value="none"></br>
+                        Add additional web seeds(the file you specified will also be used as a web seed)
+                        <input type="text" name="urlList" value="none"></br>
                         </br>
                         <input type="button" NAME="button" Value="Click" onClick="genTorrent(this.form)">
-
                 </form>
         </div>
         <div id="disclaimer">
