@@ -1,5 +1,5 @@
 //<script language="javascript">
-/*function genTorrent(form){
+function genTorrent(form){
                         var file = form.fileURL.value;
                         // Validate name and turn into string
                         var name = (form.fileName.value == "none" ) ? null : form.fileName.value;
@@ -26,5 +26,5 @@
                                         alert( "ERROR", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
                                 }
                         })
-                }*/
+                }
 //</script>
