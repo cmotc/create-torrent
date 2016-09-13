@@ -102,24 +102,24 @@
         </div>
         <div id="form">
                 <form name="buildTorrent" action="" method="GET">
-                        Enter the URL of the file you want to torrent-ify:
+                        <p class="item">Enter the URL of the file you want to torrent-ify:</p>
                         <input type="text" name="fileURL" class="right" value="Enter a URL to torrentify"></br>
-                        Filename:
+                        <p class="item">Filename:</p>
                         <input type="text" name="fileName" class="right" value="default(name of File URL above)"></br>
-                        Torrent Author:
+                        <p class="item">Torrent Author:</p>
                         <input type="text" name="createdBy" class="right" value="none"></br>
                         <a href="">Advanced Options(eventually, these will be hidden by default): </a> </br>
-                        Torrent Comment:
+                        <p class="item">Torrent Comment:</p>
                         <input type="text" name="comment" class="right" value="none"></br>
-                        Torrent Date Override:
+                        <p class="item">Torrent Date Override:</p>
                         <input type="text" name="creationDate" class="right" value="none"></br>
-                        Is this a "Private" torrent?
+                        <p class="item">Is this a "Private" torrent?</p>
                         <input type="checkbox" name="privateTorrent" class="right" value="true"></br>
-                        Set arbitrary piece length(use with caution):
+                        <p class="item">Set arbitrary piece length(use with caution):</p>
                         <input type="text" name="pieceLength" class="right" value="none"></br>
-                        Add additional announce URL's:
+                        <p class="item">Add additional announce URL's:</p>
                         <input type="text" name="announceList" class="right" value="none"></br>
-                        Add additional web seeds(the file you specified will also be used as a web seed)
+                        <p class="item">Add additional web seeds(the file you specified will also be used as a web seed)</p>
                         <input type="text" name="urlList" class="right" value="none"></br>
                         </br>
                         <input type="button" NAME="button" Value="Click" onClick=genTorrent(this.form)>

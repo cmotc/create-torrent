@@ -12,6 +12,14 @@
         margin: auto;
 }
 
+.item{
+        width: 50%;
+        font-size: large;
+        text-align: right;
+        margin: auto;
+        border: 3px solid green;
+}
+
 #form{
         width: 50%;
         font-size: large;
@@ -36,5 +44,5 @@
 
 .right{
         float: right;
-        border: 3px solid green;
 }
+
