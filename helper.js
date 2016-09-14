@@ -34,5 +34,4 @@ function genTorrent(form){
                         }
                         xhr.send();
                         // alert( file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
-
                 }
