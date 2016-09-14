@@ -24,7 +24,8 @@ function genTorrent(form){
                                 var announcers = (form.announceList.value == "none") ? null : form.announceList.value.split(",");
                                 // Turn supplemental webseeds into array of strings, comma-separated
                                 var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
-                                createTorrent(blob, , function (err, torrent) {
+                                options = {null}
+                                createTorrent(blob, options, function (err, torrent) {
                                         if ( !err ) {
                                                 alert( "SUCCESS", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
                                         }else{
