@@ -10,7 +10,7 @@ function genTorrent(form){
                                 blob.name=file;
                                 // Validate name and turn into string
                                 var name = (form.fileName.value == "none" ) ? null : form.fileName.value;
-                                blob.name = (name != null) ? blob.name() : name;
+                                blob.name = (name != null) ? blob.name : name;
                                 var creator = (form.createdBy.value == "none") ? null : form.createdBy.value;
                                 // Validate comment and turn into string
                                 var comment = (form.comment.value == "none") ? null : form.comment.value;
@@ -33,7 +33,6 @@ function genTorrent(form){
                                 })
                         }
                         xhr.send();
-
                         // alert( file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
 
                 }
