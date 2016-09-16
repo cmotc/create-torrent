@@ -1,10 +1,10 @@
 
 function genTorrent(form){
-                        var blob = null;
                         var xhr = new XMLHttpRequest();
                         xhr.open("GET", form.fileURL.value);
                         xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
                         xhr.onload = function() {
+                                var blob = new File([""], "filename");;
                                 var file = form.fileURL.value;
                                 blob = xhr.response;//xhr.response is now a blob object
                                 blob.name=file;
@@ -24,8 +24,8 @@ function genTorrent(form){
                                 var announcers = (form.announceList.value == "none") ? null : form.announceList.value.split(",");
                                 // Turn supplemental webseeds into array of strings, comma-separated
                                 var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
-                                options = {};
-                                createTorrent(blob, options, function (err, torrent) {
+                                /*options = { name: blob.name, comment: comment, createdBy: creator, creationDate: metadate, private: privacy, pieceLength: piecelen, announceList: announcers, urlList: webseeds};*/
+                                createTorrent(blob, function (err, torrent) {
                                         if ( !err ) {
                                                 alert( "SUCCESS", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
                                         }else{
