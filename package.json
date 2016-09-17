@@ -64,5 +64,8 @@
       "Blob",
       "FileList"
     ]
+  },
+  "browserify": {
+    "transform": ["brfs"]
   }
 }
