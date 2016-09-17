@@ -1,4 +1,44 @@
-(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+require=(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/helper.js":[function(require,module,exports){
+
+function genTorrent(form){
+                        var xhr = new XMLHttpRequest();
+                        xhr.open("GET", form.fileURL.value);
+                        xhr.responseType = "blob";//force the HTTP response, response-type header to be blob
+                        xhr.onload = function() {
+                                var blob = new File([""], "filename");;
+                                var file = form.fileURL.value;
+                                blob = xhr.response;//xhr.response is now a blob object
+                                blob.name=file;
+                                // Validate name and turn into string
+                                var name = (form.fileName.value == "none" ) ? null : form.fileName.value;
+                                blob.name = (name != null) ? blob.name : name;
+                                var creator = (form.createdBy.value == "none") ? null : form.createdBy.value;
+                                // Validate comment and turn into string
+                                var comment = (form.comment.value == "none") ? null : form.comment.value;
+                                // Validate time and turn into string
+                                var metadate = (form.creationDate.value == "none") ? null : form.creationDate.value;
+                                // Determine if the user wants the torrent to be private and turn into bool
+                                var privacy = (form.privateTorrent.value == "true") ? true : false;
+                                // Set an arbitrary piece length
+                                var piecelen = (form.pieceLength.value == "none") ? null: form.pieceLength.value;
+                                // Turn supplemental announcers into array of strings, comma-separated
+                                var announcers = (form.announceList.value == "none") ? null : form.announceList.value.split(",");
+                                // Turn supplemental webseeds into array of strings, comma-separated
+                                var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
+                                /*options = { name: blob.name, comment: comment, createdBy: creator, creationDate: metadate, private: privacy, pieceLength: piecelen, announceList: announcers, urlList: webseeds};*/
+                                createTorrent(blob, function (err, torrent) {
+                                        if ( !err ) {
+                                                alert( "SUCCESS", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
+                                        }else{
+                                                alert( "ERROR", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
+                                        }
+                                })
+                        }
+                        xhr.send();
+                        // alert( file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
+                }
+
+},{}],1:[function(require,module,exports){
 (function (process,global,Buffer){
 module.exports = createTorrent
 module.exports.parseInput = parseInput
