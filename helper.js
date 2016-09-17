@@ -25,7 +25,7 @@ function genTorrent(form){
                                 // Turn supplemental webseeds into array of strings, comma-separated
                                 var webseeds = (form.urlList.value == "none") ? null : form.urlList.value.split(",");
                                 /*options = { name: blob.name, comment: comment, createdBy: creator, creationDate: metadate, private: privacy, pieceLength: piecelen, announceList: announcers, urlList: webseeds};*/
-                                createTorrent(blob, function (err, torrent) {
+                                createTorrent(blob, { name: 'My Cool Torrent' } , function (err, torrent) {
                                         if ( !err ) {
                                                 alert( "SUCCESS", "; ", file, "; " , name, "; " , creator, "; " , comment, "; " , metadate, "; " , privacy, "; " , piecelen, "; " , announcers, "; " , webseeds );
                                         }else{
