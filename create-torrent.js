@@ -22,7 +22,7 @@ var corePath = require('path')
 var extend = require('xtend')
 var FileReadStream = require('filestream/read')
 var flatten = require('flatten')
-var fs = require('fs')
+
 var isFile = require('is-file')
 var junk = require('junk')
 var MultiStream = require('multistream')
@@ -494,7 +494,7 @@ function getStreamStream (readable, file) {
 }
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {},require("buffer").Buffer)
-},{"_process":48,"bencode":4,"block-stream2":5,"buffer":41,"filestream/read":11,"flatten":12,"fs":39,"is-file":13,"junk":14,"multistream":15,"once":18,"path":47,"piece-length":19,"readable-stream":34,"run-parallel":35,"simple-sha1":36,"xtend":38}],2:[function(require,module,exports){
+},{"_process":48,"bencode":4,"block-stream2":5,"buffer":41,"filestream/read":11,"flatten":12,"is-file":13,"junk":14,"multistream":15,"once":18,"path":47,"piece-length":19,"readable-stream":34,"run-parallel":35,"simple-sha1":36,"xtend":38}],2:[function(require,module,exports){
 (function (Buffer){
 /**
  * Decodes bencoded data.
